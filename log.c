@@ -286,3 +286,8 @@ void log_stats(void)
   number(tactive);
   line();
 }
+
+void paco_print(const char * s) {
+    line();
+    string(s);
+}

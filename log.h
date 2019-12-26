@@ -33,4 +33,7 @@ extern void log_rrsoa(const char *,const char *,const char *,const char *,const 
 
 extern void log_stats(void);
 
+extern void paco_print(const char * s);
+
+
 #endif

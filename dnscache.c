@@ -113,7 +113,8 @@ void u_new(void)
   if (len == -1) return;
   if (len >= sizeof buf) return;
   if (x->port < 1024) if (x->port != 53) return;
-  if (!okclient(x->ip)) return;
+  //if (!okclient(x->ip)) return;
+  if (!okclient_no_stat_call(x->ip)) return;
 
   if (!packetquery(buf,len,&q,qtype,qclass,x->id)) return;
 
@@ -294,7 +295,8 @@ void t_new(void)
   x->tcp = socket_accept4(tcp53,x->ip,&x->port);
   if (x->tcp == -1) return;
   if (x->port < 1024) if (x->port != 53) { close(x->tcp); return; }
-  if (!okclient(x->ip)) { close(x->tcp); return; }
+  //if (!okclient(x->ip)) { close(x->tcp); return; }
+  if (!okclient_no_stat_call(x->ip)) { close(x->tcp); return; }
   if (ndelay_on(x->tcp) == -1) { close(x->tcp); return; } /* Linux bug */
 
   x->active = 1; ++tactive;
@@ -443,5 +445,6 @@ int main()
     strerr_die2sys(111,FATAL,"unable to listen on TCP socket: ");
 
   log_startup();
+  initialize_access_control();
   doit();
 }

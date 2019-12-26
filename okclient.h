@@ -3,4 +3,7 @@
 
 extern int okclient(char *);
 
+extern void initialize_access_control(void);
+extern int okclient_no_stat_call(char *);
+
 #endif
